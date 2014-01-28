@@ -3,11 +3,12 @@
 '''Script para cambiar la mac'''
 
 import os, sys, subprocess
+from termcolor import colored
 
 #Comprueba si eres root
 def eresRoot():
     if os.getuid() != 0:
-        print 'No eres root :-('
+        print colored ('No eres root :-(', 'red')
         sys.exit(1)
 
 #Apaga o enciende la interfaz
@@ -45,26 +46,25 @@ def cambiaMac(interfaz=None, mac=None):
 #Codigo principal
 def main():
     eresRoot()
-    print '***************************************************'
-    print 'Apagando interfaz ...'
+    print colored ( '***************************************************', 'blue')
+    print colored ('Apagando interfaz ...', 'green')
     if gestionaInterfaz('apaga') == 0:
-        print 'Interfaz apagada!'
+        print colored ('Interfaz apagada!', 'green')
     else:
-        print 'No se puede apagar la interfaz :-('
+        print colored ('No se puede apagar la interfaz :-(', 'red')
         sys.exit(2)
-    print 'Procediendo a cambiar la mac...'
+    print colored ('Procediendo a cambiar la mac...', 'green')
     if cambiaMac() == 0:
-        print 'Direccion mac cambiada!'
+        print colored ('Direccion mac cambiada!', 'green')
     else:
-        print 'No se ha podido cambiar la direccion mac :-('
+        print colored ('No se ha podido cambiar la direccion mac :-(', 'red')
         sys.exit(3)
-    print 'Levantando de nuevo la interfaz'
+    print colored ('Levantando de nuevo la interfaz', 'green')
     if gestionaInterfaz('enciende') == 0:
-        print 'Interfaz reinicada!'
+        print colored ('Interfaz reinicada!', 'green')
     else:
-        print 'No se ha podido reiniciar la interfaz despues del cambio'
+        print colored ('No se ha podido reiniciar la interfaz despues del cambio', 'red')
         sys.exit(4)
-    print '****************************************************'
-
+    print colored ('****************************************************', 'blue')
 if __name__ == "__main__":
     main()
