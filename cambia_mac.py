@@ -11,6 +11,15 @@ def eresRoot():
         print colored ('No eres root :-(', 'red')
         sys.exit(1)
 
+#Realiza un rfkill 
+def rfkill():
+    rfkill_comando = 'rfkill unblock all'
+    try:
+        subprocess.check_call(rfkill_comando, shell=True)
+        return 0
+    except:
+        return -1
+        
 #Apaga o enciende la interfaz
 def gestionaInterfaz(accion, interfaz=None):
     if interfaz is None:
@@ -47,6 +56,9 @@ def cambiaMac(interfaz=None, mac=None):
 def main():
     eresRoot()
     print colored ( '***************************************************', 'blue')
+    if rfkill() != 0:
+        print colored ('Problemas con rfkill', 'red') 
+
     print colored ('Apagando interfaz ...', 'green')
     if gestionaInterfaz('apaga') == 0:
         print colored ('Interfaz apagada!', 'green')
