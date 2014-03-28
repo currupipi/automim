@@ -103,7 +103,7 @@ def main():
             print colored ('Pero finalente no se ha cambiado correctamente la mac ...', 'red')
     else:
         print colored ('No se ha podido reiniciar la interfaz despues del cambio', 'red')
-        sys.exit(40)
+        sys.exit(4)
     if dhcp() != 0:
         print colored ('ERROR al pedir dhcp','red')
     
