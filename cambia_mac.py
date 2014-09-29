@@ -67,6 +67,18 @@ def cambiaMac(interfaz=None, mac=None):
     except:
         return -1
 
+#Flush ip address 
+def flush_ip(interface=None):
+    if interface is None:
+        interface = 'wlan0'
+    command = 'ip addr flush dev ' + interface
+    try:
+        output = subprocess.check_call(command, shell=True)
+        return 0
+    except:
+        return -1
+
+
 #Lanza DHCP
 def dhcp():
     pide_dhcp = 'dhclient wlan0'
@@ -76,13 +88,13 @@ def dhcp():
     except:
         return -1
 
+
 #Codigo principal
 def main():
     eresRoot()
     print colored ( '***************************************************', 'blue')
     if rfkill() != 0:
         print colored ('Problemas con rfkill', 'red') 
-
     print colored ('Apagando interfaz ...', 'green')
     if gestionaInterfaz('apaga') == 0:
         print colored ('Interfaz apagada!', 'green')
@@ -104,9 +116,13 @@ def main():
     else:
         print colored ('No se ha podido reiniciar la interfaz despues del cambio', 'red')
         sys.exit(4)
+    print colored ('Flushing ip', 'green')
+    flush_ip()
+    print colored ('Ip flushed!', 'green')
     if dhcp() != 0:
         print colored ('ERROR al pedir dhcp','red')
-    
+    else: 
+        print colored ('Mac changed and interface active', 'green')
     print colored ('****************************************************', 'blue')
 if __name__ == "__main__":
     main()
