@@ -80,10 +80,10 @@ def dhcp():
 def main():
     eresRoot()
     print colored ( '***************************************************', 'blue')
-    if rfkill() != 0:
-        print colored ('Problemas con rfkill', 'red') 
+#   if rfkill() != 0:
+#       print colored ('Problemas con rfkill', 'red') 
 
-    print colored ('Apagando interfaz ...', 'green')
+#   print colored ('Apagando interfaz ...', 'green')
     if gestionaInterfaz('apaga') == 0:
         print colored ('Interfaz apagada!', 'green')
     else:
