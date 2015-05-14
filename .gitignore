@@ -1,1 +1,12 @@
+#Skip swap and temporal files
+#----------------------------
 *.swp
+*~
+
+#Exclude virtualenv
+#----------------------------
+bin/**
+include/**
+lib/**
+local/**
+
